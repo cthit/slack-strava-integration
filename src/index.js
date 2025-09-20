@@ -12,14 +12,6 @@ const getTokens = () => {
     const tokens_path = join(__dirname, "tokens.json");
 
     if (!fs.existsSync(tokens_path)) {
-        console.log("Token file not found:", tokens_path);
-        exit(1);
-    }
-
-    try {
-        return JSON.parse(fs.readFileSync(tokens_path));
-    } catch {
-        fs.unlinkSync(tokens_path);
         refresh_token()
             .then(() => console.log("Token refreshed!"))
             .catch(error => {
@@ -27,7 +19,7 @@ const getTokens = () => {
                 throw "Unable to refresh token!";
             });
     }
-    return {};
+    return JSON.parse(fs.readFileSync(tokens_path));
 };
 
 const tokens = getTokens();

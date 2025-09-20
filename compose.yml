@@ -1,0 +1,10 @@
+services:
+  bot:
+    build:
+      context: .
+    environment:
+      hook_token: $hook_token
+      client_secret: $client_secret
+      refresh_token: $refresh_token
+      club_id: $club_id
+      title: $title
